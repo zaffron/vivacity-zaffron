@@ -1,8 +1,11 @@
+import express from 'express';
 import request from 'supertest';
 import { createServer } from 'http';
 
-import app from './app';
+import defaultRoutes from './defaultRoutes';
 
+const app = express();
+app.use('/', defaultRoutes);
 const server = createServer(app);
 
 describe('GET /', () => {
