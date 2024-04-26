@@ -1,9 +1,18 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
-const app = express();
+import applicantRoutes from './routes/applicantRoutes';
+import defaultRoutes from './routes/defaultRoutes';
+import { initializeDatabase } from './db';
+import { ROUTES } from './constants';
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello Vivacity!');
-});
+export async function startApp() {
+  await initializeDatabase();
+  const app = express();
 
-export default app;
+  app.use(express.json());
+  app.use(ROUTES.APPLICANT, applicantRoutes);
+  app.use(ROUTES.DEFAULT, defaultRoutes);
+
+  return app;
+};
+
