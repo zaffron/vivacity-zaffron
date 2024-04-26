@@ -1,13 +1,8 @@
-import express from 'express';
-import { Request, Response } from 'express';
 import { createServer } from 'http';
 
-const app = express();
-const server = createServer(app);
+import app from './app';
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello Vivacity!');
-});
+const server = createServer(app);
 
 const PORT = process.env.PORT || 3000;
 
